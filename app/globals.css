@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-plus-jakarta), sans-serif;
+  --font-fredoka: var(--font-fredoka), cursive;
+  
+  --color-pastel-blue: #A8D1E7;
+  --color-pastel-blue-light: #E1EFF6;
+  --color-pastel-blue-dark: #3A6B88;
+  --color-pastel-cream: #FFFDF9;
+  --color-pastel-pink: #FFD5E5;
+  --color-pastel-yellow: #FFF3B0;
+  --color-pastel-purple: #D6C7FF;
+  --color-pastel-green: #D8F3DC;
+  --color-pastel-gray: #EAEFF2;
+  
+  --color-brand-dark: #1E293B;
+  --color-brand-border: #2C3E50;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float-delayed 8s ease-in-out infinite;
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-bounce-slow: bounce-slow 3s ease-in-out infinite;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #FFFDF9;
+  --foreground: #2C3E50;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFDF9;
+  border-left: 2px solid #2C3E50;
+}
+::-webkit-scrollbar-thumb {
+  background: #A8D1E7;
+  border: 2px solid #2C3E50;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #87B8D4;
+}
+
+.playground-grid {
+  background-color: #FFFDF9;
+  background-image: radial-gradient(#A8D1E7 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.playground-grid-dark {
+  background-color: #E1EFF6;
+  background-image: radial-gradient(#3A6B88 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.neo-card {
+  background-color: #FFFDF9;
+  border: 3px solid #2C3E50;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0px 0px #2C3E50;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neo-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px 0px #2C3E50;
+}
+
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-fredoka);
+  border: 3px solid #2C3E50;
+  border-radius: 16px;
+  background-color: #A8D1E7;
+  color: #2C3E50;
+  font-weight: 600;
+  box-shadow: 4px 4px 0px 0px #2C3E50;
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.neo-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #2C3E50;
+  background-color: #BBE0F2;
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px #2C3E50;
+}
+
+.cable-connector {
+  position: relative;
+}
+.cable-connector::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #FFF3B0;
+  border: 2px solid #2C3E50;
+  border-radius: 50%;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float-delayed {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.sticker {
+  font-family: var(--font-fredoka);
+  border: 2.5px solid #2C3E50;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0px 0px #2C3E50;
+  transform: rotate(-1.5deg);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sticker:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 4px 4px 0px 0px #2C3E50;
+}
+
+.pulse-pin {
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(168, 209, 231, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(168, 209, 231, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(168, 209, 231, 0); }
 }
